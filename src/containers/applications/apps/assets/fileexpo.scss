@@ -276,6 +276,9 @@
     padding: 0 1em;
     font-size: 0.72em;
     font-weight: 400;
+    grid-template-columns: repeat(auto-fill, var(--cwidth));
+    justify-content: space-between;
+    align-items: flex-end;
 
     &[data-size="lg"] {
       --cwidth: 8.6em;
@@ -290,9 +293,6 @@
     .conticon {
       align-self: flex-start;
     }
-    grid-template-columns: repeat(auto-fill, var(--cwidth));
-    justify-content: space-between;
-    align-items: flex-end;
   }
 }
 

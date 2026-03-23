@@ -302,8 +302,10 @@ body[data-theme="dark"] .aboutApp {
     img {
       border-radius: 24px;
     }
-    transition: all 200ms ease-in-out;
-    cursor: pointer;
+    & {
+      transition: all 200ms ease-in-out;
+      cursor: pointer;
+    }
 
     &::after {
       content: "";
