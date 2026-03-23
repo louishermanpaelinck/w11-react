@@ -10,7 +10,7 @@ const config = ({ mode }) => {
         registerType: "autoUpdate",
       }),
     ],
-    base: "",
+    base: "/w11-react/",
     define: {
       "process.env.NODE_ENV": `"${mode}"`,
     },

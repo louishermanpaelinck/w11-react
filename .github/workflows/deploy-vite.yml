@@ -1,12 +1,20 @@
-name: Build and Deploy (Vite)
+name: Build and Deploy (Vite) to GitHub Pages
 
 on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -21,17 +29,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Archive build
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: dist
-          server-dir: /htdocs
+          path: 'build'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
